@@ -44,20 +44,13 @@ test.describe('Create Article Scenarios', () => {
       tag: faker.lorem.word(),
     };
 
-    await test.step('Fill in all article fields', async () => {
-      await createArticlePage.fillTitleField(article.title);
-      await createArticlePage.fillDescriptionField(article.description);
-      await createArticlePage.fillBodyField(article.body);
-      await createArticlePage.fillTagField(article.tag);
-    });
-
-    await test.step('Publish the article', async () => {
-      await createArticlePage.clickPublishArticleButton();
-    });
-
-    await test.step('Verify article is successfully created', async () => {
-      await createArticlePage.assertArticleTitleIsVisible(article.title);
-    });
+    await createArticlePage.fillTitleField(article.title);
+    await createArticlePage.fillDescriptionField(article.description);
+    await createArticlePage.fillBodyField(article.body);
+    await createArticlePage.fillTagField(article.tag);
+    await createArticlePage.clickPublishArticleButton();
+    
+    await createArticlePage.assertArticleTitleIsVisible(article.title);
   });
 
   test('Create an article without description', async () => {
@@ -67,21 +60,14 @@ test.describe('Create Article Scenarios', () => {
       tag: faker.lorem.word(),
     };
 
-    await test.step('Fill in fields excluding description', async () => {
-      await createArticlePage.fillTitleField(article.title);
-      await createArticlePage.fillBodyField(article.body);
-      await createArticlePage.fillTagField(article.tag);
-    });
-
-    await test.step('Click publish button', async () => {
-      await createArticlePage.clickPublishArticleButton();
-    });
-
-    await test.step('Assert error message for empty description', async () => {
-      await createArticlePage.assertErrorMessageContainsText(
-        "Article description can't be blank",
-      );
-    });
+    await createArticlePage.fillTitleField(article.title);
+    await createArticlePage.fillBodyField(article.body);
+    await createArticlePage.fillTagField(article.tag);
+    await createArticlePage.clickPublishArticleButton();
+    
+    await createArticlePage.assertErrorMessageContainsText(
+      "Article description can't be blank",
+    );
   });
 
   test('Create an article without text body', async () => {
@@ -91,21 +77,14 @@ test.describe('Create Article Scenarios', () => {
       tag: faker.lorem.word(),
     };
 
-    await test.step('Fill in fields excluding body text', async () => {
-      await createArticlePage.fillTitleField(article.title);
-      await createArticlePage.fillDescriptionField(article.description);
-      await createArticlePage.fillTagField(article.tag);
-    });
-
-    await test.step('Click publish button', async () => {
-      await createArticlePage.clickPublishArticleButton();
-    });
-
-    await test.step('Assert error message for empty body text', async () => {
-      await createArticlePage.assertErrorMessageContainsText(
-        "Article body can't be blank",
-      );
-    });
+    await createArticlePage.fillTitleField(article.title);
+    await createArticlePage.fillDescriptionField(article.description);
+    await createArticlePage.fillTagField(article.tag);
+    await createArticlePage.clickPublishArticleButton();
+    
+    await createArticlePage.assertErrorMessageContainsText(
+      "Article body can't be blank",
+    );
   });
 
   test('Create an article without tags', async () => {
@@ -115,18 +94,11 @@ test.describe('Create Article Scenarios', () => {
       body: faker.lorem.paragraphs(2),
     };
 
-    await test.step('Fill in required fields without tags', async () => {
-      await createArticlePage.fillTitleField(article.title);
-      await createArticlePage.fillDescriptionField(article.description);
-      await createArticlePage.fillBodyField(article.body);
-    });
-
-    await test.step('Publish the article', async () => {
-      await createArticlePage.clickPublishArticleButton();
-    });
-
-    await test.step('Verify article is published without tags', async () => {
-      await createArticlePage.assertArticleTitleIsVisible(article.title);
-    });
+    await createArticlePage.fillTitleField(article.title);
+    await createArticlePage.fillDescriptionField(article.description);
+    await createArticlePage.fillBodyField(article.body);
+    await createArticlePage.clickPublishArticleButton();
+    
+    await createArticlePage.assertArticleTitleIsVisible(article.title);
   });
 });
